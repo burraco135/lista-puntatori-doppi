@@ -3,6 +3,7 @@
 
 #include "nodo.h"
 #include <iostream>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -101,7 +102,7 @@ typename Lista<T>::posizione Lista<T>::precLista(posizione p) {
 template <class T>
 void Lista<T>::insLista(typename Nodo<T>::tipoelem a, posizione p) {
 	
-	Nodo<T> *temp_nodo = new Nodo; // creo il nodo per l'elemento da inserire
+	Nodo<T> *temp_nodo; // creo il nodo per l'elemento da inserire
 	temp_nodo->setElemento(a); // inserisco il valore nel nodo
 
 	temp_nodo->setPrec(p->getPrec()); // collega il nuovo nodo
