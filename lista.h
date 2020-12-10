@@ -31,6 +31,8 @@ class Lista {
 
 		void stampaLista();
 
+		std::ostream& operator<<(std::ostream& stream, const Lista<T>&);
+
 	private:
 		// lista è una struttura di puntatori agli oggetti Nodo
 		posizione lista;
@@ -130,7 +132,7 @@ void Lista<T>::cancLista(posizione p) {
 
 template <class T>
 void Lista<T>::stampaLista() {
-	Nodo<T>* indice = primoLista();
+	Nodo<T>* indice = primoLista(); // FIXME
 
 	while ( !fineLista(indice) ) {
 		cout << leggiLista(indice);
