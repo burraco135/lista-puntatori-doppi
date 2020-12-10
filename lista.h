@@ -28,6 +28,8 @@ class Lista {
 		void insLista(tipoelem, posizione);
 		void cancLista(posizione);
 
+		void stampaLista();
+
 	private:
 		// lista è una struttura di puntatori agli oggetti Nodo
 		posizione lista;
@@ -122,6 +124,23 @@ void Lista<T>::cancLista(posizione p) {
  	p = p->getSucc(); // dealloca l'area di memoria puntata da temp
  	
  	delete temp;
+}
+
+template <class T>
+void Lista<T>::stampaLista() {
+	Nodo<T>* indice = primoLista();
+
+	while ( !fineLista(indice) ) {
+		cout << leggiLista(indice);
+
+		if ( !fineLista(succLista(indice)) ) {
+			cout << endl;
+		}
+
+		indice = succLista(indice);
+	}
+
+	cout << endl;
 }
 
 #endif //_LISTA_H
