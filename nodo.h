@@ -1,6 +1,9 @@
 #ifndef _NODO_H
 #define _NODO_H
 
+#include <iostream>
+using namespace std;
+
 template<class T>
 class Nodo {
 	public:
