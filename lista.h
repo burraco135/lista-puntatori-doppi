@@ -19,13 +19,13 @@ class Lista {
 		// operatori
 		void creaLista();
 		bool listaVuota();
-		tipoelem leggiLista(posizione);
-		void scriviLista(tipoelem, posizione);
+		typename Nodo<T>::tipoelem leggiLista(posizione);
+		void scriviLista(typename Nodo<T>::tipoelem, posizione);
 		posizione primoLista();
 		bool fineLista(posizione);
 		posizione succLista(posizione);
 		posizione precLista(posizione);
-		void insLista(tipoelem, posizione);
+		void insLista(typename Nodo<T>::tipoelem, posizione);
 		void cancLista(posizione);
 
 		void stampaLista();
@@ -56,8 +56,8 @@ Lista<T>::~Lista() {
 // ----- Implementazione classe Lista | Operatori ----- //
 template <class T>
 void Lista<T>::creaLista() {
-	tipoelem ElementoNullo;
-	lista = new Nodo;
+	typename Nodo<T>::tipoelem ElementoNullo;
+	lista = new class Nodo<T>::Nodo;
 	lista->setElemento(ElementoNullo); // inserisce l'elemento
 	lista->setSucc(lista); // il nodo precedente del corrente è se stesso
 	lista->setPrec(lista); // il nodo precedente del corrente è se stesso
@@ -69,12 +69,12 @@ bool Lista<T>::listaVuota() {
 }
 
 template <class T>
-typename Lista<T>::tipoelem Lista<T>::leggiLista(posizione p) {
+typename Nodo<T>::tipoelem Lista<T>::leggiLista(posizione p) {
 	return ( p->getElemento() );
 }
 
 template <class T>
-void Lista<T>::scriviLista(tipoelem a, posizione p) {
+void Lista<T>::scriviLista(typename Nodo<T>::tipoelem a, posizione p) {
 	p->setElemento(a);
 }
 
@@ -85,7 +85,7 @@ typename Lista<T>::posizione Lista<T>::primoLista() {
 
 template <class T>
 bool Lista<T>::fineLista(posizione p) {
-	return ( p == lista; );
+	return ( p == lista );
 }
 
 template <class T>
@@ -99,23 +99,24 @@ typename Lista<T>::posizione Lista<T>::precLista(posizione p) {
 }
 
 template <class T>
-void Lista<T>::insLista(tipoelem a, posizione p) {
-	temp = new Nodo; // creo il nodo per l'elemento da inserire
-	temp->setElemento(a); // inserisco il valore nel nodo
+void Lista<T>::insLista(typename Nodo<T>::tipoelem a, posizione p) {
+	
+	Nodo<T> *temp_nodo = new Nodo; // creo il nodo per l'elemento da inserire
+	temp_nodo->setElemento(a); // inserisco il valore nel nodo
 
-	temp->setPrec(p->getPrec()); // collega il nuovo nodo
-	temp->setSucc(p);	// a quello precedente e a quello puntato da p
+	temp_nodo->setPrec(p->getPrec()); // collega il nuovo nodo
+	temp_nodo->setSucc(p);	// a quello precedente e a quello puntato da p
 
-	( p->getPrec() )->setSucc(temp); // collega il nodo puntato da p
-	p->setPrec(temp); // e quello successivo a temp
+	( p->getPrec() )->setSucc(temp_nodo); // collega il nodo puntato da p
+	p->setPrec(temp_nodo); // e quello successivo a temp
 
-	p = temp; // aggiorna p
+	p = temp_nodo; // aggiorna p
 }
 
 template <class T>
 void Lista<T>::cancLista(posizione p) {
-	Lista<T>::posizione temp;
- 	temp = p;
+	Lista<T>::posizione temp_posizione;
+ 	temp_posizione = p;
  	
  	(p->getSucc())->setPrec(p->getPrec()); // collega il nodo successivo a p a quello precedente a p
  	
@@ -123,7 +124,7 @@ void Lista<T>::cancLista(posizione p) {
 
  	p = p->getSucc(); // dealloca l'area di memoria puntata da temp
  	
- 	delete temp;
+ 	delete temp_posizione;
 }
 
 template <class T>
