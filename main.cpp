@@ -35,9 +35,6 @@ int main() {
 
 	// ----- Controllo dei puntatori ----- //
 
-
-
-
 	// stampo lista_libro
 	cout << "Lista di oggetti di tipo Libro:" << endl;
 	lista_libro.stampaLista();

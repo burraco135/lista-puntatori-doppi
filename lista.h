@@ -26,7 +26,7 @@ class Lista {
 		bool fineLista(posizione) const;
 		posizione succLista(posizione) const;
 		posizione precLista(posizione) const;
-		void insLista(typename Nodo<T>::tipoelem, posizione);
+		void insLista(typename Nodo<T>::tipoelem, posizione&);
 		void cancLista(posizione);
 
 		void stampaLista() const;
@@ -100,52 +100,20 @@ typename Lista<T>::posizione Lista<T>::precLista(posizione p) const {
 }
 
 template <class T>
-void Lista<T>::insLista(typename Nodo<T>::tipoelem a, posizione p) {
+void Lista<T>::insLista(typename Nodo<T>::tipoelem a, posizione &p) {
 	
-  Nodo<T>* nuovo_nodo;
-	nuovo_nodo = new Nodo<T>; // creo il nodo per l'elemento da inserire
-	nuovo_nodo->setElemento(a); // inserisco il valore nel nodo
+  Nodo<T>* nodo_temp;
+	nodo_temp = new Nodo<T>; // creo il nodo per l'elemento da inserire
+	nodo_temp->setElemento(a); // inserisco il valore nel nodo
 
-	nuovo_nodo->setPrec(p->getPrec()); // collega il nuovo nodo
-	nuovo_nodo->setSucc(p);	// a quello precedente e a quello puntato da p
+	nodo_temp->setPrec(p->getPrec()); // collega il nuovo nodo
+	nodo_temp->setSucc(p);	// a quello precedente e a quello puntato da p
 
-	( p->getPrec() )->setSucc(nuovo_nodo); // collega il nodo puntato da p
-	p->setPrec(nuovo_nodo); // e quello successivo a nuovo_nodo
+	( p->getPrec() )->setSucc(nodo_temp); // collega il nodo puntato da p
+	p->setPrec(nodo_temp); // e quello successivo a nuovo_nodo
 
-	p = nuovo_nodo; // aggiorna p
+	p = nodo_temp; // aggiorna l'indirizzo di p
 }
-
-/*
-
-1) creo un nuovo nodo
-2) imposto l'elemento da inserire nel nuovo nodo
-3) collego il nuovo nodo al precedente di p 		nuovo_nodo->setPrec(p->getPrec())
-4) collego il nuovo nodo al successivo p 				nuovo_nodo->setSucc(p)
-
-if p == lista 
-	while !fineLista
-
-
-[nuovo_nodo] [succ] -> 
-						 [prec] -> 
-						 [elemento] -> elemento nuovo_nodo
-
-[nodo_in_posizione_p-1] [succ] -> puntatore a p
-												[prec] -> puntatore a p-2
-												[elemento] -> elemento_p-1
-
-[nuovo_nodo] [succ] -> p
-						 [prec] -> p-1
-						 [elemento] -> elemento nuovo_nodo
-
-[nodo_in_posizione_(ex p)p+1] [succ] -> nodo_in_posizione_p+1 -----
-											[prec] -> nodo_in_posizione_p-1 -----	
-											[elemento] -> elemento_p				----- elemento nuovo_nodo
-
-[nodo_in_posizione_p+2] [succ] -> nodo in posizione p+2 
-												[prec] -> nodo in posizione p+1 (ex p)
-												[elemento] -> elemento_p+2
-*/
 
 template <class T>
 void Lista<T>::cancLista(posizione p) {
