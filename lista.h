@@ -19,17 +19,17 @@ class Lista {
 
 		// operatori
 		void creaLista();
-		bool listaVuota() const;
-		typename Nodo<T>::tipoelem leggiLista(posizione) const;
+		bool listaVuota();
+		typename Nodo<T>::tipoelem leggiLista(posizione);
 		void scriviLista(typename Nodo<T>::tipoelem, posizione);
-		posizione primoLista() const;
-		bool fineLista(posizione) const;
-		posizione succLista(posizione) const;
-		posizione precLista(posizione) const;
+		posizione primoLista();
+		bool fineLista(posizione);
+		posizione succLista(posizione);
+		posizione precLista(posizione);
 		void insLista(typename Nodo<T>::tipoelem, posizione&);
-		void cancLista(posizione);
+		void cancLista(posizione&);
 
-		void stampaLista() const;
+		void stampaLista();
 
 	private:
 		// lista è una struttura di puntatori agli oggetti Nodo
@@ -48,9 +48,8 @@ Lista<T>::Lista(const Lista<T>& l) { } //FIXME
 template <class T>
 Lista<T>::~Lista() {
 	while (lista->getSucc() != lista->getPrec()) {
-		cancLista(lista->getSucc());
+		cancLista(lista);
 	}
-
 	delete lista;
 }
 
@@ -65,12 +64,12 @@ void Lista<T>::creaLista() {
 }
 
 template <class T>
-bool Lista<T>::listaVuota() const {
+bool Lista<T>::listaVuota() {
 	return ( lista->getSucc() == lista && lista->getPrec() == lista );
 }
 
 template <class T>
-typename Nodo<T>::tipoelem Lista<T>::leggiLista(posizione p) const {
+typename Nodo<T>::tipoelem Lista<T>::leggiLista(posizione p) {
 	return ( p->getElemento() );
 }
 
@@ -80,22 +79,22 @@ void Lista<T>::scriviLista(typename Nodo<T>::tipoelem a, posizione p) {
 }
 
 template <class T>
-typename Lista<T>::posizione Lista<T>::primoLista() const {
+typename Lista<T>::posizione Lista<T>::primoLista() {
 	return ( lista->getSucc() );
 }
 
 template <class T>
-bool Lista<T>::fineLista(posizione p) const {
+bool Lista<T>::fineLista(posizione p) {
 	return ( p == lista );
 }
 
 template <class T>
-typename Lista<T>::posizione Lista<T>::succLista(posizione p) const {
+typename Lista<T>::posizione Lista<T>::succLista(posizione p) {
 	return ( p->getSucc() );
 }
 
 template <class T>
-typename Lista<T>::posizione Lista<T>::precLista(posizione p) const {
+typename Lista<T>::posizione Lista<T>::precLista(posizione p) {
 	return ( p->getPrec() );
 }
 
@@ -116,7 +115,7 @@ void Lista<T>::insLista(typename Nodo<T>::tipoelem a, posizione &p) {
 }
 
 template <class T>
-void Lista<T>::cancLista(posizione p) {
+void Lista<T>::cancLista(posizione &p) {
 	Lista<T>::posizione temp_posizione;
  	temp_posizione = p;
  	
@@ -126,11 +125,11 @@ void Lista<T>::cancLista(posizione p) {
   
  	p = p->getSucc(); // dealloca l'area di memoria puntata da temp
  	
- 	delete temp_posizione;
+ 	delete (temp_posizione);
 }
 
 template <class T>
-void Lista<T>::stampaLista() const {
+void Lista<T>::stampaLista() {
 	Nodo<T>* indice = primoLista();
 
 	while ( !fineLista(indice) ) {

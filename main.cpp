@@ -64,6 +64,8 @@ int main() {
 	// stampo lista_interi
 	lista_interi.stampaLista();
 
+  cout << "bu0: " << lista_interi.leggiLista(indice_interi) << endl;
+
 	// | ----- Inserire qui delle operazioni sulla lista di interi ----- | //
 	// esempio - cancellare un elemento e stampare la lista aggiornata:
 	// lista_interi.cancLista(indice_interi = lista_interi.succLista(primoLista));

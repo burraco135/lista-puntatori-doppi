@@ -17,9 +17,9 @@ class Nodo {
 		void setElemento(tipoelem a);
 		tipoelem getElemento() const;
 		void setSucc(Nodo*);
-		Nodo* getSucc();
+		Nodo* getSucc() const;
 		void setPrec(Nodo*);
-		Nodo* getPrec();
+		Nodo* getPrec() const;
 		bool operator==(Nodo*);
 	
 	private:
@@ -47,13 +47,13 @@ template<class T>
 void Nodo<T>::setSucc(Nodo* p) { succ = p; }
 
 template<class T>
-typename Nodo<T>::Nodo* Nodo<T>::getSucc() { return succ; }
+typename Nodo<T>::Nodo* Nodo<T>::getSucc() const { return succ; }
 
 template<class T>
 void Nodo<T>::setPrec(Nodo* p) { prec = p; }
 
 template<class T>
-typename Nodo<T>::Nodo* Nodo<T>::getPrec() { return prec; }
+typename Nodo<T>::Nodo* Nodo<T>::getPrec() const { return prec; }
 
 template<class T>
 bool Nodo<T>::operator==(Nodo* p) {
